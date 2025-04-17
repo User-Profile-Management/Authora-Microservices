@@ -1,0 +1,224 @@
+{
+  "version": 3,
+  "name": "User Service API Gateway",
+  "log_level": "DEBUG",
+  "port": 8000,
+  "endpoints": [
+    {
+      "endpoint": "/api/auth/google-login",
+      "method": "POST",
+      "output_encoding": "json",
+      "input_headers": ["Authorization", "Content-Type"],
+      "backend": [
+        {
+          "url_pattern": "/api/auth/google-login",
+          "host": [
+            "http://localhost:8081"
+          ]
+           
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/auth/login",
+      "method": "POST",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/auth/login",
+          "host": [
+            "http://localhost:8081"
+          ],
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/users/register",
+      "method": "POST",
+      "input_headers": ["Content-Type"]  ,
+      "backend": [
+        {
+          "url_pattern": "/api/users/register",
+          "host": [
+            "http://localhost:8081"
+          ]
+         
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/users/profile",
+      "method": "GET",
+      "input_headers": ["Authorization"]  ,
+      "backend": [
+        {
+          "url_pattern": "/api/users/profile",
+          "host": [
+            "http://localhost:8081"
+          ]
+          
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/users/{userId}",
+      "method": "PUT",
+      "input_headers": ["Authorization", "Content-Type"] , 
+      "backend": [
+        {
+          "url_pattern": "/api/users/{userId}",
+          "host": [
+            "http://localhost:8081"
+          ]
+          
+        }
+      ]
+    },
+   
+   
+    {
+      "endpoint": "/api/users/update-password",
+      "method": "PUT",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/users/update-password",
+          "host": [
+            "http://localhost:8081"
+          ],
+          "input_headers": ["Authorization"]  
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/users",
+      "method": "GET",
+      "input_headers": ["Authorization"],
+      "querystring_params": ["role", "status"],
+      "backend": [
+        {
+          "url_pattern": "/api/users",
+          "host": [
+            "http://localhost:8081"
+          ],
+          "disable_host_sanitize": true
+        }
+      ]
+    },
+   
+    {
+      "endpoint": "/api/users/pending",
+      "method": "GET",
+      "input_headers": ["Authorization"] ,
+      "backend": [
+        {
+          "url_pattern": "/api/users/pending",
+          "host": [
+            "http://localhost:8081"
+          ]
+           
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/users/{userId}",
+      "method": "DELETE",
+      "input_headers": ["Authorization"] ,
+      "backend": [
+        {
+          "url_pattern": "/api/users/{userId}",
+          "host": [
+            "http://localhost:8081"
+          ]
+           
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/users/mentors",
+      "method": "GET",
+     "input_headers": ["Authorization"] ,
+      "backend": [
+        {
+          "url_pattern": "/api/users/mentors",
+          "host": [
+            "http://localhost:8081"
+          ]
+           
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/users/profile/{userId}",
+      "method": "GET",
+      "input_headers": ["Authorization"] ,
+      "backend": [
+        {
+          "url_pattern": "/api/users/profile/{userId}",
+          "host": [
+            "http://localhost:8081"
+          ]
+          
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/users/{userId}/restore",
+      "method": "PUT",
+     "input_headers": ["Authorization"],
+      "backend": [
+        {
+          "url_pattern": "/api/users/{userId}/restore",
+          "host": [
+            "http://localhost:8081"
+          ]
+            
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/users/projects/{userId}",
+      "method": "GET",
+      "input_headers": ["Authorization"] ,
+      "backend": [
+        {
+          "url_pattern": "/api/users/projects/{userId}",
+          "host": [
+            "http://localhost:8081"
+          ]
+           
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/users/certificates/certificates",
+      "method": "POST",
+     "input_headers": ["Authorization"]  ,
+      "backend": [
+        {
+          "url_pattern": "/api/users/certificates/certificates",
+          "host": [
+            "http://localhost:8081"
+          ]
+          
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/users/certificates/get/{userId}",
+      "method": "GET",
+      "output_encoding": "json",
+      "backend": [
+        {
+          "url_pattern": "/api/users/certificates/get/{userId}",
+          "host": [
+            "http://localhost:8081"
+          ]
+        }
+      ]
+    }
+  ]
+}
