@@ -364,12 +364,10 @@ import java.util.*;
 
 
         @GetMapping("/users/profile/{userId}")
-        public ResponseEntity<ApiResponse<User>> getUserById(@PathVariable String userId) {
+        public ResponseEntity<ApiResponse<ProfileDTO>> getUserById(@PathVariable String userId) {
             try {
-
                 User user = userService.getUserById(userId)
                         .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
-
 
                 if (user.getDeletedAt() != null) {
                     return ResponseEntity.status(403).body(
@@ -377,12 +375,26 @@ import java.util.*;
                     );
                 }
 
+                // Create a ProfileDTO with all necessary user details
+                ProfileDTO profile = new ProfileDTO(
+                        user.getUserId(),
+                        user.getFullName(),
+                        user.getEmail(),
+                        user.getContactNo(),
+                        user.getEmergencyContact(),
+                        user.getAddress(),
+                        user.getDateOfBirth(),
+                        user.getStatus().name(),
+                        user.getProfilePicture(),
+                        user.getRole().getRoleName(),
+                        user.getDeletedAt()
+                );
 
-                return ResponseEntity.ok(new ApiResponse<>(200, "User retrieved successfully.", user, null));
+                return ResponseEntity.ok(new ApiResponse<>(200, "User retrieved successfully.", profile, null));
 
             } catch (RuntimeException e) {
-                return ResponseEntity.status(500).body(
-                        new ApiResponse<>(500, "Error retrieving user details: " + e.getMessage(), null, e.getMessage())
+                return ResponseEntity.status(404).body(
+                        new ApiResponse<>(404, "Error retrieving user details: " + e.getMessage(), null, e.getMessage())
                 );
             }
         }
