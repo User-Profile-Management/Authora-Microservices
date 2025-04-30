@@ -65,9 +65,12 @@ public class AuthService {
             throw new DisabledException("Your account is pending approval");
         }
 
+        // Extract userId from the user object
+        String userId = user.getUserId(); // Assuming getId() is the method to retrieve the userId
+
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getEmail());
-        String token = jwtUtil.generateToken(userDetails);
+        String token = jwtUtil.generateToken(userDetails, userId);
 
 
 
@@ -77,7 +80,7 @@ public class AuthService {
 
     public JWTResponse generateJwtToken(User user) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
-        String token = jwtUtil.generateToken(userDetails);
+        String token = jwtUtil.generateToken(userDetails, user.getUserId());
         return new JWTResponse(token); // wrap it into JWTResponse
     }
 
