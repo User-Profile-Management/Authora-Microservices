@@ -194,29 +194,57 @@
       ]
     },
     {
-      "endpoint": "/api/users/certificates/certificates",
+      "endpoint": "/api/users/certificates",
       "method": "POST",
      "input_headers": ["Authorization"]  ,
       "backend": [
         {
-          "url_pattern": "/api/users/certificates/certificates",
+          "url_pattern": "/api/users/certificates",
           "host": [
-            "http://localhost:8081"
+            "http://localhost:8083"
           ]
           
         }
       ]
     },
     {
-      "endpoint": "/api/users/certificates/get/{userId}",
+      "endpoint": "/api/users/certificates/get",
       "method": "GET",
-      "output_encoding": "json",
+      "input_headers": ["Authorization"]  ,
       "backend": [
         {
-          "url_pattern": "/api/users/certificates/get/{userId}",
+          "url_pattern": "/api/users/certificates/get",
           "host": [
-            "http://localhost:8081"
+            "http://localhost:8083"
           ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/users/certificates/{certificateId}/download",
+      "method": "GET",
+     "input_headers": ["Authorization"]  ,
+      "backend": [
+        {
+          "url_pattern": "/api/users/certificates/{,certificateId}/download",
+          "host": [
+            "http://localhost:8083"
+          ]
+          
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/users/certificates/{certificateId}",
+      "method": "DELETE",
+     "input_headers": ["Authorization"]  ,
+      "backend": [
+        {
+          "url_pattern": "/api/users/certificates/{,certificateId}",
+          "host": [
+            "http://localhost:8083"
+          ]
+          
         }
       ]
     }
